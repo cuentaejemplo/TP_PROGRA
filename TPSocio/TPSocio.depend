@@ -1,0 +1,31 @@
+# depslib dependency file v1.0
+1700336680 source:d:\unlam\algoritmosestructurasdedatos\tpsocio\arbol.c
+	"arbol.h"
+
+1700336645 d:\unlam\algoritmosestructurasdedatos\tpsocio\arbol.h
+	<stdlib.h>
+	<string.h>
+
+1700332879 source:d:\unlam\algoritmosestructurasdedatos\tpsocio\funcionces.c
+	"funcionces.h"
+
+1700324857 d:\unlam\algoritmosestructurasdedatos\tpsocio\funcionces.h
+	<stdio.h>
+	"primitivas.h"
+
+1700337971 source:d:\unlam\algoritmosestructurasdedatos\tpsocio\main.c
+	"main.h"
+
+1700318657 d:\unlam\algoritmosestructurasdedatos\tpsocio\main.h
+	<stdio.h>
+	"funcionces.h"
+	"primitivas.h"
+
+1700335442 d:\unlam\algoritmosestructurasdedatos\tpsocio\primitivas.h
+	<stdio.h>
+	"arbol.h"
+	"funcionces.h"
+
+1700337366 source:d:\unlam\algoritmosestructurasdedatos\tpsocio\primitivas.c
+	"primitivas.h"
+
