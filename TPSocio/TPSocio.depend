@@ -29,3 +29,34 @@
 1700337366 source:d:\unlam\algoritmosestructurasdedatos\tpsocio\primitivas.c
 	"primitivas.h"
 
+1700422957 source:d:\unlam\topicos\tp_progra\tpsocio\arbol.c
+	"arbol.h"
+
+1700422957 d:\unlam\topicos\tp_progra\tpsocio\arbol.h
+	<stdlib.h>
+	<string.h>
+
+1700430817 source:d:\unlam\topicos\tp_progra\tpsocio\funcionces.c
+	"funcionces.h"
+
+1700427852 d:\unlam\topicos\tp_progra\tpsocio\funcionces.h
+	<stdio.h>
+	<stdlib.h>
+	"primitivas.h"
+
+1700427687 d:\unlam\topicos\tp_progra\tpsocio\primitivas.h
+	<stdio.h>
+	"arbol.h"
+	"funcionces.h"
+
+1700428069 source:d:\unlam\topicos\tp_progra\tpsocio\main.c
+	"main.h"
+
+1700427606 d:\unlam\topicos\tp_progra\tpsocio\main.h
+	<stdio.h>
+	"funcionces.h"
+	"primitivas.h"
+
+1700424168 source:d:\unlam\topicos\tp_progra\tpsocio\primitivas.c
+	"primitivas.h"
+

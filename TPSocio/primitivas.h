@@ -4,7 +4,6 @@
 #include "arbol.h"
 #include "funcionces.h"
 
-
 typedef struct{
     void *clave;
     unsigned nro_reg;

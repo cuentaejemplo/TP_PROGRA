@@ -72,61 +72,6 @@ int ind_buscar(const t_indice* ind, void *clave, unsigned *nro_reg)
     return 1;
 }
 
-//buscar v2
-int ind_buscar(const t_indice* ind, void *clave, unsigned nro_reg)
-{
-    t_nodoa *p = ind->arbol;
-    while (*p != NULL)
-    {
-        int cmp_res = ind->cmp(clave, (*p)->pd); 
-        if (cmp_res == 0)  
-        {
-            memcpy(clave, (*p)->pd, MIN(ind->tam_clave, (*p)->tam));
-            return 1;
-        }
-        else if (cmp_res < 0) 
-            p = &(*p)->izq;
-        else 
-            p = &(*p)->der;
-    }
-    return 0;
-}
-
-int ind_eliminar(t_indice* ind, void *clave, unsigned nro_reg)
-{
-    t_nodo **p = &(ind->arbol); 
-    int cmp_res; 
-    while (*p != NULL && (cmp_res = ind->cmp(clave, (*p)->info)) != 0)
-    {
-        if (cmp_res < 0) 
-            p = &(*p)->izq;
-        else 
-            p = &(*p)->der;
-    }
-    if (*p == NULL) 
-        return 0;
-    t_nodo *aux = *p; 
-    if (eliminar_elem_arbol_bin_busq(&(ind->arbol), clave, ind->tam_clave, ind->cmp)) 
-    {
-        memcpy(clave, aux->info, MIN(ind->tam_clave, aux->tam));
-        free(aux);
-        return 1;
-    }
-    return 0;
-}
-
-int ind_grabar(const t_indice* ind, const char* path)
-{
-    FILE* pf = fopen(path, "wb");
-    if (archivo == NULL)
-        return 0;
-    fwrite(&(ind->tam_clave), sizeof(size_t), 1, pf);
-    fwrite(&(ind->cmp), sizeof(int (*)(const void*, const void*)), 1, pf);
-    fwrite(ind->arbol, sizeof(t_nodo), 1, pf);
-    fclose(pf);
-    return 1;
-}
-
 void ind_vaciar (t_indice* ind){
     vaciar_arbol(&ind->arbol);
 }

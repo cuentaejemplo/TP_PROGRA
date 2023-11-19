@@ -1,6 +1,7 @@
 #ifndef FUNCIONCES_H_INCLUDED
 #define FUNCIONCES_H_INCLUDED
 #include <stdio.h>
+#include <stdlib.h>
 #include "primitivas.h"
 typedef struct
 {
@@ -25,5 +26,7 @@ typedef struct
 
 int compararSocio(const void *d1, const void *d2);
 void mostrarNodo(const void *dato, unsigned tam, void *nose);
-
+void crearArchivoBinario(const char *path);
+void mostrarArchivoBinario(const char *path);
+void ordenarArchivoBinario(const char *path);
 #endif // FUNCIONCES_H_INCLUDED

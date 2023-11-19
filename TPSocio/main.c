@@ -2,35 +2,59 @@
 
 int main()
 {
+    char menu;
     t_indice indice;
-    FILE *pf;
-    t_Socio socio;
-//    t_Socio socio[] = {
-//    {1003,"Aguante Yo",12345687,{15,3,1990},'O',{1,1,2020},"ADULTO",{1,1,2023},'A',{0,0,0}},
-//    {1001,"Juan Perez",12345678,{15,3,1990},'M',{1,1,2020},"MENOR",{1,1,2023},'A',{0,0,0}},
-//    {1002,"Juan Redes",12345679,{15,3,1990},'F',{1,1,2020},"CADETE",{1,1,2023},'A',{0,0,0}}
-//    };
-//
-    pf = fopen("socio.dat","rb");
-//
-//    for(int i=0; i <3 ; i++)
-//        fwrite(&socio[i],sizeof(t_Socio),1,pf);
 
-    long nro = 1001;
-    unsigned tam=0;
+    //principio del programa debo preguntar donde se encuentra el archivo txt, para poder generar archivo binario
+    crearArchivoBinario("socio.dat");
+    ordenarArchivoBinario("socio.dat");
+
     ind_crear(&indice,sizeof(indice),compararSocio);
-    ind_cargar(&indice,"socio.dat");
-    ind_recorrer(&indice,mostrarNodo,NULL);
-    ind_buscar(&indice,&nro,&tam);
 
-    fseek(pf,tam,SEEK_CUR);
-    fread(&socio,sizeof(t_Socio),1,pf);
-    printf("\n\n%ld %s\n", socio.NroSocio, socio.ApyNom);
+    do
+    {
+        printf("==================================\n");
+        printf("Alta nuevo socio - A\n");
+        printf("Modificar socio - M\n");
+        printf("Baja de socio- B\n");
+        printf("Listar todo los socios- L\n");
+        printf("Listar en orden- V\n");
+        printf("Listar socios con mayor retraso- P\n");
+        printf("Salir - S\n\n");
+        printf("==================================\n");
 
+        printf("Ingrese un caracter: ");
+        scanf("%c",&menu);
+        fflush(stdin);
 
-    ind_vaciar(&indice);
-    //ind_insertar(&indice,&nroSocio,sizeof(nroSocio));
-
-    fclose(pf);
-
+        switch(ES_MINISCULA(menu))
+        {
+        case'A':
+            printf("Dar de alta socio\n");
+            system ("pause");
+            break;
+        case'M':
+            printf("Modificar socio\n");
+            system ("pause");
+            break;
+        case'B':
+            printf("Baja de socio\n");
+            system ("pause");
+            break;
+        case'L':
+            printf("Listar todo los socios fueron dados de baja\n");
+            system ("pause");
+            break;
+        case'V':
+            printf("Listar los socios ordenados\n");
+            system ("pause");
+            break;
+        case'P':
+            printf("Listar socios con mayor retraso\n");
+            system ("pause");
+            break;
+        }
+        system("cls");
+    }
+    while(ES_MINISCULA(menu) != 'S');
 }
