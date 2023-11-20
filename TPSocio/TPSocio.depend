@@ -36,27 +36,27 @@
 	<stdlib.h>
 	<string.h>
 
-1700430817 source:d:\unlam\topicos\tp_progra\tpsocio\funcionces.c
+1700442486 source:d:\unlam\topicos\tp_progra\tpsocio\funcionces.c
 	"funcionces.h"
 
-1700427852 d:\unlam\topicos\tp_progra\tpsocio\funcionces.h
+1700442493 d:\unlam\topicos\tp_progra\tpsocio\funcionces.h
 	<stdio.h>
 	<stdlib.h>
 	"primitivas.h"
 
-1700427687 d:\unlam\topicos\tp_progra\tpsocio\primitivas.h
+1700443007 d:\unlam\topicos\tp_progra\tpsocio\primitivas.h
 	<stdio.h>
 	"arbol.h"
 	"funcionces.h"
 
-1700428069 source:d:\unlam\topicos\tp_progra\tpsocio\main.c
+1700442987 source:d:\unlam\topicos\tp_progra\tpsocio\main.c
 	"main.h"
 
-1700427606 d:\unlam\topicos\tp_progra\tpsocio\main.h
+1700439919 d:\unlam\topicos\tp_progra\tpsocio\main.h
 	<stdio.h>
 	"funcionces.h"
 	"primitivas.h"
 
-1700424168 source:d:\unlam\topicos\tp_progra\tpsocio\primitivas.c
+1700443499 source:d:\unlam\topicos\tp_progra\tpsocio\primitivas.c
 	"primitivas.h"
 

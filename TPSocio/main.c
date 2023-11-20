@@ -4,12 +4,17 @@ int main()
 {
     char menu;
     t_indice indice;
-
     //principio del programa debo preguntar donde se encuentra el archivo txt, para poder generar archivo binario
-    crearArchivoBinario("socio.dat");
-    ordenarArchivoBinario("socio.dat");
+    crearArchivoBinario(ARCH_BINARIO);
+    ordenarArchivoBinario(ARCH_BINARIO);
 
+//    unsigned pos = 0;
     ind_crear(&indice,sizeof(indice),compararSocio);
+    ind_cargar(&indice,ARCH_BINARIO);
+//    ind_buscar(&indice,&nro,&pos);
+
+//    fseek(pf,pos * sizeof(t_Socio),SEEK_SET);
+//    fread(&socio,sizeof(t_Socio),1,pf);
 
     do
     {
@@ -31,10 +36,12 @@ int main()
         {
         case'A':
             printf("Dar de alta socio\n");
+            darAltaSocio(&indice,ARCH_BINARIO);
             system ("pause");
             break;
         case'M':
             printf("Modificar socio\n");
+            modificarSocio(&indice,ARCH_BINARIO);
             system ("pause");
             break;
         case'B':

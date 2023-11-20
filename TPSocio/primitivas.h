@@ -5,8 +5,7 @@
 #include "funcionces.h"
 
 typedef struct{
-    void *clave;
-    unsigned nro_reg;
+    unsigned tam_clave;
     int (*cmp)(const void *,const void *);
     t_arbol arbol;
 }t_indice;
@@ -18,4 +17,9 @@ int ind_recorrer (const t_indice* ind, void (*accion)(const void *, unsigned, vo
 int ind_buscar(const t_indice* ind, void *clave, unsigned *nro_reg);
 int ind_eliminar (t_indice* ind, void *clave, unsigned nro_reg);
 void ind_vaciar (t_indice* ind);
+
+
+
+void darAltaSocio(t_indice *ind,const char *path);
+void modificarSocio(t_indice *ind,const char *path);
 #endif // PRIMITIVAS_H_INCLUDED

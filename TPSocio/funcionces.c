@@ -6,14 +6,6 @@ int compararSocio(const void *d1, const void *d2)
     return *dato1 - *dato2;
 }
 
-void mostrarNodo(const void *dato, unsigned tam, void *nose)
-{
-    t_indice *ind = (t_indice *)dato;
-    long puntero_long = *(long *)ind->clave;
-
-    printf("%ld\n", puntero_long);
-}
-
 void crearArchivoBinario(const char *path)
 {
     FILE *pfT,*pfB;
@@ -137,3 +129,4 @@ void ordenarArchivoBinario(const char *path)
     free(socio);
     fclose(pf);
 }
+
