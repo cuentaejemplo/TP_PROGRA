@@ -36,10 +36,10 @@
 	<stdlib.h>
 	<string.h>
 
-1700442486 source:d:\unlam\topicos\tp_progra\tpsocio\funcionces.c
+1700443835 source:d:\unlam\topicos\tp_progra\tpsocio\funcionces.c
 	"funcionces.h"
 
-1700442493 d:\unlam\topicos\tp_progra\tpsocio\funcionces.h
+1700443778 d:\unlam\topicos\tp_progra\tpsocio\funcionces.h
 	<stdio.h>
 	<stdlib.h>
 	"primitivas.h"
@@ -49,7 +49,7 @@
 	"arbol.h"
 	"funcionces.h"
 
-1700442987 source:d:\unlam\topicos\tp_progra\tpsocio\main.c
+1700443760 source:d:\unlam\topicos\tp_progra\tpsocio\main.c
 	"main.h"
 
 1700439919 d:\unlam\topicos\tp_progra\tpsocio\main.h

@@ -54,6 +54,7 @@ int main()
             break;
         case'V':
             printf("Listar los socios ordenados\n");
+            mostrarSociosOrdenados(ARCH_BINARIO);
             system ("pause");
             break;
         case'P':

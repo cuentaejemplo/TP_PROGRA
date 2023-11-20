@@ -29,5 +29,5 @@ int compararSocio(const void *d1, const void *d2);
 void crearArchivoBinario(const char *path);
 void mostrarArchivoBinario(const char *path);
 void ordenarArchivoBinario(const char *path);
-
+void mostrarSociosOrdenados(const char *path);
 #endif // FUNCIONCES_H_INCLUDED
