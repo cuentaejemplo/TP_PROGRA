@@ -51,6 +51,7 @@ int main()
             break;
         case'L':
             printf("Listar todo los socios fueron dados de baja\n");
+            mostrarSocioDadoBaja(ARCH_BINARIO);
             system ("pause");
             break;
         case'V':

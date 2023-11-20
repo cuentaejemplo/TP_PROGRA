@@ -130,6 +130,46 @@ void ordenarArchivoBinario(const char *path)
     fclose(pf);
 }
 
+void mostrarSocioDadoBaja(const char *path)
+{
+    FILE *pf;
+    t_Socio socio;
+    pf = fopen(path,"rb");
+
+    if(!pf)
+    {
+        printf("No se pudo abrir el archivo\n");
+        return;
+    }
+    fread(&socio,sizeof(t_Socio),1,pf);
+
+    while(!feof(pf))
+    {
+        if(socio.Estado == 'B')
+            printf("%ld %s %ld %d/%d/%d %s %c %d/%d/%d %d/%d/%d %c\n",
+                   socio.NroSocio,
+                   socio.ApyNom,
+                   socio.DNI,
+                   socio.FNacimiento.Dia,
+                   socio.FNacimiento.Mes,
+                   socio.FNacimiento.Anio,
+                   socio.Categoria,
+                   socio.Sexo,
+                   socio.FAfiliacion.Dia,
+                   socio.FAfiliacion.Mes,
+                   socio.FAfiliacion.Anio,
+                   socio.FBaja.Dia,
+                   socio.FBaja.Mes,
+                   socio.FBaja.Anio,
+                   socio.Estado
+                  );
+
+        fread(&socio,sizeof(t_Socio),1,pf);
+    }
+
+    fclose(pf);
+}
+
 void mostrarSociosOrdenados(const char *path)
 {
     FILE *pf;
