@@ -143,57 +143,64 @@ void darBajaSocio(t_indice *ind,const char *path)
         return;
     }
 
-    printf("Ingrese el numero de socio: ");
+    printf("\nIngrese el numero de socio: ");
     scanf("%ld",&nroSocio);
 
     if(nroSocio > 1 && nroSocio < 10000000)
     {
         if(ind_buscar(ind,&nroSocio,&pos))
         {
-            printf("Se encontro el numero socio\n");
+            printf("\nSe encontro el numero socio\n");
             fseek(pf,pos*sizeof(t_Socio),SEEK_SET);
             fread(&socio,sizeof(t_Socio),1,pf);
             printf("%ld %s\n", socio.NroSocio,socio.ApyNom);
 
             if(socio.Estado == 'B')
             {
-                printf("El numero socio ya se encuentra dado de baja.\n");
+                printf("\nEl numero socio ya se encuentra dado de baja.\n");
                 fclose(pf);
                 return;
             }
 
-            printf("Ingrese el dia: ");
+            printf("\nIngrese el dia: ");
             scanf("%d",&dia);
 
-            printf("Ingrese el mes: ");
+            printf("\nIngrese el mes: ");
             scanf("%d",&mes);
 
-            printf("Ingrese el anio: ");
+            printf("\nIngrese el anio: ");
             scanf("%d",&anio);
 
-            socio.Estado = 'B';
-            socio.FBaja.Dia = dia;
-            socio.FBaja.Mes = mes;
-            socio.FBaja.Anio = anio;
+            if(validarFecha(dia,mes,anio))
+            {
+                socio.Estado = 'B';
+                socio.FBaja.Dia = dia;
+                socio.FBaja.Mes = mes;
+                socio.FBaja.Anio = anio;
 
-            fseek(pf,pos*sizeof(t_Socio),SEEK_SET);
-            fwrite(&socio,sizeof(t_Socio),1,pf);
+                fseek(pf,pos*sizeof(t_Socio),SEEK_SET);
+                fwrite(&socio,sizeof(t_Socio),1,pf);
 
-            printf("Se dio de baja existosamente.\n");
+                printf("Se dio de baja existosamente.\n");
+            }
+            else
+            {
+                printf("\nFecha invalida\n");
+            }
 
             fclose(pf);
             return;
         }
         else
         {
-            printf("Nro socio no existe.\n");
+            printf("\nNro socio no existe.\n");
             fclose(pf);
             return;
         }
     }
     else
     {
-        printf("Nro socio invalido.\n");
+        printf("\nNro socio invalido.\n");
         return;
     }
 

@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include "arbol.h"
 #include "funcionces.h"
+#include "fecha.h"
 
 typedef struct{
     unsigned tam_clave;

@@ -8,13 +8,8 @@ int main()
     crearArchivoBinario(ARCH_BINARIO);
     ordenarArchivoBinario(ARCH_BINARIO);
 
-//    unsigned pos = 0;
     ind_crear(&indice,sizeof(indice),compararSocio);
     ind_cargar(&indice,ARCH_BINARIO);
-//    ind_buscar(&indice,&nro,&pos);
-
-//    fseek(pf,pos * sizeof(t_Socio),SEEK_SET);
-//    fread(&socio,sizeof(t_Socio),1,pf);
 
     do
     {
