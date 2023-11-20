@@ -2,25 +2,25 @@
 
 void ind_crear (t_indice* ind, size_t tam_clave, int (*cmp)(const void*, const void*))
 {
-    ind->nro_reg= tam_clave;
+    ind->tam_clave= tam_clave;
     ind->cmp = cmp;
     ind->arbol = NULL;
 }
 
 int ind_insertar(t_indice *ind, void *clave, unsigned nro_reg)
 {
-    void *aux_reg_ind = malloc(ind->nro_reg + sizeof(unsigned));
+    void *aux_reg_ind = malloc(ind->tam_clave + sizeof(unsigned));
     if (!aux_reg_ind)
     {
         return -1;
     }
 
-    memcpy(aux_reg_ind, clave, ind->nro_reg);
+    memcpy(aux_reg_ind, clave, ind->tam_clave);
 
-    memcpy(aux_reg_ind + ind->nro_reg, &nro_reg, sizeof(unsigned));
+    memcpy(aux_reg_ind + ind->tam_clave, &nro_reg, sizeof(unsigned));
 
-    if(!insertarEnOrderRecursiva(&ind->arbol,aux_reg_ind,ind->nro_reg+sizeof(unsigned),
-                        ind->cmp))
+    if(!insertarEnOrderRecursiva(&ind->arbol,aux_reg_ind,ind->tam_clave+sizeof(unsigned),
+                                 ind->cmp))
     {
         free(aux_reg_ind);
         return 0;
@@ -31,21 +31,28 @@ int ind_insertar(t_indice *ind, void *clave, unsigned nro_reg)
     return 1;
 }
 
-int ind_cargar (t_indice* ind, const char* path){
+int ind_cargar (t_indice* ind, const char* path)
+{
     t_Socio socio;
     FILE *pf;
 
     pf = fopen(path,"rb");
 
-    if(!pf){
+    if(!pf)
+    {
         printf("No pudo abrir el archivo\n");
         return 0;
     }
 
-    fread(&socio,sizeof(t_Socio),1,pf);
+    fseek(pf,0,SEEK_SET);
 
-    while(!feof(pf)){
-        ind_insertar(ind,&socio.NroSocio,sizeof(t_Socio));
+    fread(&socio,sizeof(t_Socio),1,pf);
+    int i = 0;
+
+    while(!feof(pf))
+    {
+        ind_insertar(ind,&socio.NroSocio,i);
+        i++;
         fread(&socio,sizeof(t_Socio),1,pf);
     }
 
@@ -53,7 +60,8 @@ int ind_cargar (t_indice* ind, const char* path){
     return 1;
 }
 
-int ind_recorrer (const t_indice* ind, void (*accion)(const void *, unsigned, void *),void* param){
+int ind_recorrer (const t_indice* ind, void (*accion)(const void *, unsigned, void *),void* param)
+{
     recorrerArbolOrden(&ind->arbol,accion,param);
     return 1;
 }
@@ -63,70 +71,205 @@ int ind_buscar(const t_indice* ind, void *clave, unsigned *nro_reg)
     t_nodo **nodo = buscarNodo(&ind->arbol, clave, ind->cmp);
     if (!nodo)
     {
-        printf("No se encontro el Nro socio\n");
         return 0;
     }
 
-    memcpy(nro_reg,(*nodo)->info + ind->nro_reg, sizeof(unsigned));
+    memcpy(nro_reg, (*nodo)->info + ind->tam_clave, sizeof(unsigned));
 
     return 1;
 }
 
-//buscar v2
-int ind_buscar(const t_indice* ind, void *clave, unsigned nro_reg)
+void ind_vaciar (t_indice* ind)
 {
-    t_nodoa *p = ind->arbol;
-    while (*p != NULL)
-    {
-        int cmp_res = ind->cmp(clave, (*p)->pd); 
-        if (cmp_res == 0)  
-        {
-            memcpy(clave, (*p)->pd, MIN(ind->tam_clave, (*p)->tam));
-            return 1;
-        }
-        else if (cmp_res < 0) 
-            p = &(*p)->izq;
-        else 
-            p = &(*p)->der;
-    }
-    return 0;
-}
-
-int ind_eliminar(t_indice* ind, void *clave, unsigned nro_reg)
-{
-    t_nodo **p = &(ind->arbol); 
-    int cmp_res; 
-    while (*p != NULL && (cmp_res = ind->cmp(clave, (*p)->info)) != 0)
-    {
-        if (cmp_res < 0) 
-            p = &(*p)->izq;
-        else 
-            p = &(*p)->der;
-    }
-    if (*p == NULL) 
-        return 0;
-    t_nodo *aux = *p; 
-    if (eliminar_elem_arbol_bin_busq(&(ind->arbol), clave, ind->tam_clave, ind->cmp)) 
-    {
-        memcpy(clave, aux->info, MIN(ind->tam_clave, aux->tam));
-        free(aux);
-        return 1;
-    }
-    return 0;
-}
-
-int ind_grabar(const t_indice* ind, const char* path)
-{
-    FILE* pf = fopen(path, "wb");
-    if (archivo == NULL)
-        return 0;
-    fwrite(&(ind->tam_clave), sizeof(size_t), 1, pf);
-    fwrite(&(ind->cmp), sizeof(int (*)(const void*, const void*)), 1, pf);
-    fwrite(ind->arbol, sizeof(t_nodo), 1, pf);
-    fclose(pf);
-    return 1;
-}
-
-void ind_vaciar (t_indice* ind){
     vaciar_arbol(&ind->arbol);
+}
+
+void darAltaSocio(t_indice *ind,const char *path)
+{
+    FILE *pf;
+    long nroSocio;
+    unsigned pos=0;
+    t_Socio socio;
+
+    pf = fopen(path,"r+b");
+    if(!pf)
+    {
+        printf("No se pudo abrir el archivo.\n");
+        return;
+    }
+
+    printf("Ingrese el numero de socio: ");
+    scanf("%ld",&nroSocio);
+
+    if(nroSocio > 1 && nroSocio < 10000000)
+    {
+        if(ind_buscar(ind,&nroSocio,&pos))
+        {
+            printf("\nNumero socio existente\n");
+            fseek(pf,pos*sizeof(t_Socio),SEEK_SET);
+            fread(&socio,sizeof(t_Socio),1,pf);
+
+            if(socio.Estado == 'B'){
+                socio.FBaja.Dia =0;
+                socio.FBaja.Mes =0;
+                socio.FBaja.Anio =0;
+                socio.Estado = 'A';
+                fseek(pf,pos*sizeof(t_Socio),SEEK_SET);
+                fwrite(&socio,sizeof(t_Socio),1,pf);
+                printf("Se dio de alta existosamente\n");
+            }
+
+            fclose(pf);
+            return;
+        }
+        else
+        {
+            printf("Nro socio no existe.\n");
+            fclose(pf);
+            return;
+        }
+    }
+    else
+    {
+        printf("Nro socio invalido.\n");
+        return;
+    }
+
+    fclose(pf);
+}
+
+void darBajaSocio(t_indice *ind,const char *path)
+{
+    FILE *pf;
+    long nroSocio;
+    unsigned pos=0;
+    int dia=0,mes=0,anio=0;
+    t_Socio socio;
+
+    pf = fopen(path,"r+b");
+    if(!pf)
+    {
+        printf("No se pudo abrir el archivo.\n");
+        return;
+    }
+
+    printf("\nIngrese el numero de socio: ");
+    scanf("%ld",&nroSocio);
+
+    if(nroSocio > 1 && nroSocio < 10000000)
+    {
+        if(ind_buscar(ind,&nroSocio,&pos))
+        {
+            printf("\nSe encontro el numero socio\n");
+            fseek(pf,pos*sizeof(t_Socio),SEEK_SET);
+            fread(&socio,sizeof(t_Socio),1,pf);
+            printf("%ld %s\n", socio.NroSocio,socio.ApyNom);
+
+            if(socio.Estado == 'B')
+            {
+                printf("\nEl numero socio ya se encuentra dado de baja.\n");
+                fclose(pf);
+                return;
+            }
+
+            printf("\nIngrese el dia: ");
+            scanf("%d",&dia);
+
+            printf("\nIngrese el mes: ");
+            scanf("%d",&mes);
+
+            printf("\nIngrese el anio: ");
+            scanf("%d",&anio);
+
+            if(validarFecha(dia,mes,anio))
+            {
+                socio.Estado = 'B';
+                socio.FBaja.Dia = dia;
+                socio.FBaja.Mes = mes;
+                socio.FBaja.Anio = anio;
+
+                fseek(pf,pos*sizeof(t_Socio),SEEK_SET);
+                fwrite(&socio,sizeof(t_Socio),1,pf);
+
+                printf("Se dio de baja existosamente.\n");
+            }
+            else
+            {
+                printf("\nFecha invalida\n");
+            }
+
+            fclose(pf);
+            return;
+        }
+        else
+        {
+            printf("\nNro socio no existe.\n");
+            fclose(pf);
+            return;
+        }
+    }
+    else
+    {
+        printf("\nNro socio invalido.\n");
+        return;
+    }
+
+    fclose(pf);
+}
+
+void modificarSocio(t_indice *ind,const char *path)
+{
+    FILE *pf;
+    long nroSocio;
+    unsigned pos=0;
+    char nuevoNombre[60];
+    t_Socio socio;
+
+    pf = fopen(path,"r+b");
+    if(!pf)
+    {
+        printf("No se pudo abrir el archivo.\n");
+        return;
+    }
+
+    printf("Ingrese el numero de socio: ");
+    scanf("%ld",&nroSocio);
+    fflush(stdin);
+    if(nroSocio > 1 && nroSocio < 10000000)
+    {
+        if(ind_buscar(ind,&nroSocio,&pos))
+        {
+            printf("nroSocio existente\n");
+            fseek(pf,pos*sizeof(t_Socio),SEEK_SET);
+            fread(&socio,sizeof(t_Socio),1,pf);
+            printf("%ld %s\n", socio.NroSocio,socio.ApyNom);
+
+            printf("Ingrese el nuevo nombre del socio: ");
+            gets(nuevoNombre);
+            fflush(stdin);
+
+            fseek(pf,pos*sizeof(t_Socio),SEEK_SET);
+            strcpy(socio.ApyNom,nuevoNombre);
+            fwrite(&socio,sizeof(t_Socio),1,pf);
+
+            fseek(pf,pos*sizeof(t_Socio),SEEK_SET);
+            fread(&socio,sizeof(t_Socio),1,pf);
+            printf("%ld %s\n", socio.NroSocio,socio.ApyNom);
+
+            fclose(pf);
+            return;
+        }
+        else
+        {
+            printf("Nro socio no existe.\n");
+            fclose(pf);
+            return;
+        }
+    }
+    else
+    {
+        printf("Nro socio invalido.\n");
+        return;
+    }
+    fclose(pf);
 }
