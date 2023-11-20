@@ -105,7 +105,7 @@ void darAltaSocio(t_indice *ind,const char *path)
     {
         if(ind_buscar(ind,&nroSocio,&pos))
         {
-            printf("nroSocio existente\n");
+            printf("Numero socio existente\n");
             fseek(pf,pos*sizeof(t_Socio),SEEK_SET);
             fread(&socio,sizeof(t_Socio),1,pf);
             printf("%ld %s\n", socio.NroSocio,socio.ApyNom);
@@ -114,7 +114,81 @@ void darAltaSocio(t_indice *ind,const char *path)
         }
         else
         {
+            printf("Nro socio no existe.\n");
+            fclose(pf);
+            return;
+        }
+    }
+    else
+    {
+        printf("Nro socio invalido.\n");
+        return;
+    }
 
+    fclose(pf);
+}
+
+void darBajaSocio(t_indice *ind,const char *path)
+{
+    FILE *pf;
+    long nroSocio;
+    unsigned pos=0;
+    int dia=0,mes=0,anio=0;
+    t_Socio socio;
+
+    pf = fopen(path,"r+b");
+    if(!pf)
+    {
+        printf("No se pudo abrir el archivo.\n");
+        return;
+    }
+
+    printf("Ingrese el numero de socio: ");
+    scanf("%ld",&nroSocio);
+
+    if(nroSocio > 1 && nroSocio < 10000000)
+    {
+        if(ind_buscar(ind,&nroSocio,&pos))
+        {
+            printf("Se encontro el numero socio\n");
+            fseek(pf,pos*sizeof(t_Socio),SEEK_SET);
+            fread(&socio,sizeof(t_Socio),1,pf);
+            printf("%ld %s\n", socio.NroSocio,socio.ApyNom);
+
+            if(socio.Estado == 'B')
+            {
+                printf("El numero socio ya se encuentra dado de baja.\n");
+                fclose(pf);
+                return;
+            }
+
+            printf("Ingrese el dia: ");
+            scanf("%d",&dia);
+
+            printf("Ingrese el mes: ");
+            scanf("%d",&mes);
+
+            printf("Ingrese el anio: ");
+            scanf("%d",&anio);
+
+            socio.Estado = 'B';
+            socio.FBaja.Dia = dia;
+            socio.FBaja.Mes = mes;
+            socio.FBaja.Anio = anio;
+
+            fseek(pf,pos*sizeof(t_Socio),SEEK_SET);
+            fwrite(&socio,sizeof(t_Socio),1,pf);
+
+            printf("Se dio de baja existosamente.\n");
+
+            fclose(pf);
+            return;
+        }
+        else
+        {
+            printf("Nro socio no existe.\n");
+            fclose(pf);
+            return;
         }
     }
     else

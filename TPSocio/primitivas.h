@@ -21,5 +21,6 @@ void ind_vaciar (t_indice* ind);
 
 
 void darAltaSocio(t_indice *ind,const char *path);
+void darBajaSocio(t_indice *ind,const char *path);
 void modificarSocio(t_indice *ind,const char *path);
 #endif // PRIMITIVAS_H_INCLUDED

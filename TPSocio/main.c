@@ -46,6 +46,7 @@ int main()
             break;
         case'B':
             printf("Baja de socio\n");
+            darBajaSocio(&indice,ARCH_BINARIO);
             system ("pause");
             break;
         case'L':

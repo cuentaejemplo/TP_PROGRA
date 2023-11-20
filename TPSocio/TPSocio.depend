@@ -44,12 +44,12 @@
 	<stdlib.h>
 	"primitivas.h"
 
-1700443007 d:\unlam\topicos\tp_progra\tpsocio\primitivas.h
+1700444118 d:\unlam\topicos\tp_progra\tpsocio\primitivas.h
 	<stdio.h>
 	"arbol.h"
 	"funcionces.h"
 
-1700443760 source:d:\unlam\topicos\tp_progra\tpsocio\main.c
+1700444101 source:d:\unlam\topicos\tp_progra\tpsocio\main.c
 	"main.h"
 
 1700439919 d:\unlam\topicos\tp_progra\tpsocio\main.h
@@ -57,6 +57,6 @@
 	"funcionces.h"
 	"primitivas.h"
 
-1700443499 source:d:\unlam\topicos\tp_progra\tpsocio\primitivas.c
+1700444539 source:d:\unlam\topicos\tp_progra\tpsocio\primitivas.c
 	"primitivas.h"
 
