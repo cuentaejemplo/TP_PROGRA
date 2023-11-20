@@ -105,10 +105,20 @@ void darAltaSocio(t_indice *ind,const char *path)
     {
         if(ind_buscar(ind,&nroSocio,&pos))
         {
-            printf("Numero socio existente\n");
+            printf("\nNumero socio existente\n");
             fseek(pf,pos*sizeof(t_Socio),SEEK_SET);
             fread(&socio,sizeof(t_Socio),1,pf);
-            printf("%ld %s\n", socio.NroSocio,socio.ApyNom);
+
+            if(socio.Estado == 'B'){
+                socio.FBaja.Dia =0;
+                socio.FBaja.Mes =0;
+                socio.FBaja.Anio =0;
+                socio.Estado = 'A';
+                fseek(pf,pos*sizeof(t_Socio),SEEK_SET);
+                fwrite(&socio,sizeof(t_Socio),1,pf);
+                printf("Se dio de alta existosamente\n");
+            }
+
             fclose(pf);
             return;
         }
