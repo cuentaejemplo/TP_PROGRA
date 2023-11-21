@@ -26,9 +26,12 @@ typedef struct
 }t_Socio;
 
 int compararSocio(const void *d1, const void *d2);
-void crearArchivoBinario(const char *path);
+long compararDNI(long d1, long d2);
+int compararFecha(const void *d1,const void *d2);
+void mostrarNumeroSocio(void *d1);
+void crearArchivoBinario(const char *path, const char *pathTexto);
 void mostrarArchivoBinario(const char *path);
 void ordenarArchivoBinario(const char *path);
-void mostrarSocioDadoBaja(const char *path);
 void mostrarSociosOrdenados(const char *path);
+void mostrarArchivoIndice(const char *path);
 #endif // FUNCIONCES_H_INCLUDED

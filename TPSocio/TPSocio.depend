@@ -29,28 +29,29 @@
 1700337366 source:d:\unlam\algoritmosestructurasdedatos\tpsocio\primitivas.c
 	"primitivas.h"
 
-1700422957 source:d:\unlam\topicos\tp_progra\tpsocio\arbol.c
+1700520722 source:d:\unlam\topicos\tp_progra\tpsocio\arbol.c
 	"arbol.h"
 
-1700422957 d:\unlam\topicos\tp_progra\tpsocio\arbol.h
+1700519669 d:\unlam\topicos\tp_progra\tpsocio\arbol.h
 	<stdlib.h>
 	<string.h>
 
-1700445332 source:d:\unlam\topicos\tp_progra\tpsocio\funcionces.c
+1700522574 source:d:\unlam\topicos\tp_progra\tpsocio\funcionces.c
 	"funcionces.h"
 
-1700446452 d:\unlam\topicos\tp_progra\tpsocio\funcionces.h
+1700522570 d:\unlam\topicos\tp_progra\tpsocio\funcionces.h
 	<stdio.h>
 	<stdlib.h>
 	"primitivas.h"
 
-1700446456 d:\unlam\topicos\tp_progra\tpsocio\primitivas.h
+1700527579 d:\unlam\topicos\tp_progra\tpsocio\primitivas.h
 	<stdio.h>
 	"arbol.h"
 	"funcionces.h"
 	"fecha.h"
+	"lista.h"
 
-1700446548 source:d:\unlam\topicos\tp_progra\tpsocio\main.c
+1700527765 source:d:\unlam\topicos\tp_progra\tpsocio\main.c
 	"main.h"
 
 1700439919 d:\unlam\topicos\tp_progra\tpsocio\main.h
@@ -58,7 +59,7 @@
 	"funcionces.h"
 	"primitivas.h"
 
-1700446935 source:d:\unlam\topicos\tp_progra\tpsocio\primitivas.c
+1700528139 source:d:\unlam\topicos\tp_progra\tpsocio\primitivas.c
 	"primitivas.h"
 
 1700446374 d:\unlam\topicos\tp_progra\tpsocio\fecha.h
@@ -67,4 +68,12 @@
 
 1700446358 source:d:\unlam\topicos\tp_progra\tpsocio\fecha.c
 	"fecha.h"
+
+1700520037 source:d:\unlam\topicos\tp_progra\tpsocio\lista.c
+	"lista.h"
+
+1700505009 d:\unlam\topicos\tp_progra\tpsocio\lista.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
 

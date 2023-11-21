@@ -18,5 +18,11 @@ void crearArbol(t_arbol *arbol);
 int insertarEnOrderRecursiva(t_arbol *pa,void * info, size_t tam, int(*cmp)(const void*,const void*));
 void recorrerArbolOrden(const t_arbol *pa,void (*accion)(const void *, unsigned, void *),void *param);
 t_nodo ** buscarNodo(const t_arbol *pa,const void *info, int(*cmp)(const void*,const void*));
+t_nodo **mayor_nodo(t_arbol *pa);
+t_nodo **menor_nodo(t_arbol *pa);
+int altura_arbol(t_arbol *pa);
+int eliminar_raiz_arbol_bin_busq(t_arbol *pa);
+
+int eliminar_de_arbol(t_arbol *pa, void *d, int (*cmp)(const void *,const void*));
 void vaciar_arbol(t_arbol *pa);
 #endif // ARBOL_H_INCLUDED
